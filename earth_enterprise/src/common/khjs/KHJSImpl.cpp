@@ -14,6 +14,8 @@
 
 //
 
+#define _DEFAULT_SOURCE 1
+
 #include "KHJSImpl.h"
 #include "KHJSContext.h"
 #include <khException.h>

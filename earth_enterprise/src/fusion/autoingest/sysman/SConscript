@@ -109,7 +109,9 @@ gesystemmanager = env.executable('gesystemmanager',
       ] +
     env.ObjFromOtherDir(extraObjs),
     LIBS=['gegdal', 'geraster', 'gesearchtabs', 'genet', 'gepublish', 'gefconfigutil',
-          'geindex_r', 'geutil', 'gecommon', 'gexml', 'gemiscconfig', 'qt-mt', 'xerces-c', 'geos']
+          'geindex_r', 'geutil', 'gecommon', 'gexml', 'gemiscconfig', 'qt-mt', 'xerces-c', 'geos',
+          File('/usr/lib/x86_64-linux-gnu/liblber.so'),
+          File('/usr/lib/x86_64-linux-gnu/libldap.so')]
     )
 
 geresourceprovider = env.executable('geresourceprovider',
@@ -120,11 +122,13 @@ geresourceprovider = env.executable('geresourceprovider',
      env['FUSIONVER'],
      env['BUILDDATE'],
      ],
-    LIBS=['geautoingest', 'geconfigutil', 'gefconfigutil', 'geutil', 'gecommon', 'gexml', 'gemiscconfig', 'xerces-c', 'qt-mt'])
+    LIBS=['geautoingest', 'geconfigutil', 'gefconfigutil', 'geutil', 'gecommon', 'gexml', 'gemiscconfig', 'xerces-c', 'qt-mt', File('/usr/lib/x86_64-linux-gnu/liblber.so'), File('/usr/lib/x86_64-linux-gnu/libldap.so')])
 
 gestartdaemon = env.executable('gestartdaemon',
                                ['gestartdaemon.cpp'],
-                               LIBS=['geutil', 'gecommon', 'gemiscconfig'])
+                               LIBS=['geutil', 'gecommon', 'gemiscconfig',
+                                     File('/usr/lib/x86_64-linux-gnu/liblber.so'),
+                                     File('/usr/lib/x86_64-linux-gnu/libldap.so')])
 
 gestopdaemon = env.executable('gestopdaemon',
                               ['gestopdaemon.cpp'],

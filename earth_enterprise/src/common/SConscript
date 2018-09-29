@@ -82,15 +82,15 @@ commonsources = [ '../third_party/rsa_md5/md5c.c',
 # Check environment for png.h file
 conf = Configure(env)
 
-if not conf.CheckCHeader('libpng12/png.h'):
-    print "libpng12 must be installed!"
+if not conf.CheckCHeader('libpng/png.h'):
+    print "libpng must be installed!"
     Exit(1)
 
 env = conf.Finish()
 
 # TODO: consider to move geGdalUtils to khgdal?!
 gecommon = env.sharedLib('gecommon', commonsources,
-                         LIBS = ['keyholeutils', 'geprotobuf', 'z', 'jpeg', 'png12', 'gdal'])
+                         LIBS = ['keyholeutils', 'geprotobuf', 'z', 'jpeg', 'png', 'gdal'])
 
 utilsources = [
     'ff.cpp',

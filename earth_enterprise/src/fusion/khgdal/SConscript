@@ -36,26 +36,44 @@ gegdalutil = env.sharedLib('gegdalutil', ['RasterClusterAnalyzer.cpp'],
 
 geinfo = env.executable('geinfo', 'geinfo.cpp',
                         LIBS=['gegdal', 'geraster', 'geindex_rw',
-                              'geqtpacket', 'geindex_r', 'geutil', 'gecommon', 'gdal', 'qt-mt', 'geos'])
+                              'geqtpacket', 'geindex_r', 'geutil', 'gecommon', 'gdal', 'qt-mt', 'geos',
+                              File('/usr/lib/x86_64-linux-gnu/liblber.so'),
+                              File('/usr/lib/x86_64-linux-gnu/libldap.so')])
 
 gevirtualraster = env.executable('gevirtualraster', ['gevirtualraster.cpp'],
-                                 LIBS=['gegdal', 'gegdalutil', 'geutil', 'gecommon', 'gdal', 'qt-mt', 'geos'])
+                                 LIBS=['gegdal', 'gegdalutil', 'geutil', 'gecommon', 'gdal', 'qt-mt', 'geos',
+                                          File('/usr/lib/x86_64-linux-gnu/liblber.so'),
+                                          File('/usr/lib/x86_64-linux-gnu/libldap.so')])
 
 geupdatelut = env.executable('geupdatelut', 'geupdatelut.cpp',
-                             LIBS=['gegdal', 'geutil', 'gecommon', 'gdal', 'qt-mt', 'geos'])
+                             LIBS=['gegdal', 'geutil', 'gecommon', 'gdal', 'qt-mt', 'geos',
+                                      File('/usr/lib/x86_64-linux-gnu/liblber.so'),
+                                      File('/usr/lib/x86_64-linux-gnu/libldap.so')])
 
 gesplitkhvr = env.executable('gesplitkhvr', 'gesplitkhvr.cpp',
-                             LIBS=['gegdal', 'geutil', 'gecommon', 'qt-mt', 'geos'])
+                             LIBS=['gegdal', 'geutil', 'gecommon', 'qt-mt', 'geos',
+                                      File('/usr/lib/x86_64-linux-gnu/liblber.so'),
+                                      File('/usr/lib/x86_64-linux-gnu/libldap.so')])
 
 khprepvirtrast = env.executable('khprepvirtrast', 'khprepvirtrast.cpp',
-                                LIBS=['gegdal', 'geutil', 'gecommon', 'gdal', 'qt-mt', 'geos'])
+                                LIBS=['gegdal', 'geutil', 'gecommon', 'gdal', 'qt-mt', 'geos',
+                                      File('/usr/lib/x86_64-linux-gnu/liblber.so'),
+                                      File('/usr/lib/x86_64-linux-gnu/libldap.so')])
+
 getranslate = env.executable('getranslate', 'getranslate.cpp',
-                             LIBS=['gegdal', 'gdal', 'geos'])
+                             LIBS=['gegdal', 'gdal', 'geos',
+                                      File('/usr/lib/x86_64-linux-gnu/liblber.so'),
+                                      File('/usr/lib/x86_64-linux-gnu/libldap.so')])
+
 gereproject = env.executable('gereproject', 'gereproject.cpp',
-                             LIBS=['gegdal', 'geutil', 'gdal', 'geos'])
+                             LIBS=['gegdal', 'geutil', 'gdal', 'geos',
+                                      File('/usr/lib/x86_64-linux-gnu/liblber.so'),
+                                      File('/usr/lib/x86_64-linux-gnu/libldap.so')])
 
 
-khgdal_test = env.test('khgdal_test', ['khgdal_test.cpp'], LIBS=['gegdal', 'gecommon', 'geos'])
+khgdal_test = env.test('khgdal_test', ['khgdal_test.cpp'], LIBS=['gegdal', 'gecommon', 'geos',
+                                                                  File('/usr/lib/x86_64-linux-gnu/liblber.so'),
+                                                                  File('/usr/lib/x86_64-linux-gnu/libldap.so')])
 
 
 env.install('fusion_bin', [geinfo, gevirtualraster, gesplitkhvr,

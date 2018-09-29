@@ -43,6 +43,8 @@ gedbrootgen = env.executable('gedbrootgen',
                                      'geutil',
                                      'gecommon',
                                      'qt-mt',
+                                     File('/usr/lib/x86_64-linux-gnu/liblber.so'),
+                                     File('/usr/lib/x86_64-linux-gnu/libldap.so')
                                      ])
 
 gerasterdbrootgen = env.executable('gerasterdbrootgen',
@@ -52,6 +54,8 @@ gerasterdbrootgen = env.executable('gerasterdbrootgen',
                                            'geutil',
                                            'gecommon',
                                            'qt-mt',
+                                           File('/usr/lib/x86_64-linux-gnu/liblber.so'),
+                                           File('/usr/lib/x86_64-linux-gnu/libldap.so')
                                            ])
 
 gelayerjsgen = env.executable('gelayerjsgen',
@@ -62,6 +66,8 @@ gelayerjsgen = env.executable('gelayerjsgen',
                                       'geutil',
                                       'gecommon',
                                       'qt-mt',
+                                      File('/usr/lib/x86_64-linux-gnu/liblber.so'),
+                                      File('/usr/lib/x86_64-linux-gnu/libldap.so')
                                       ])
 
 env.install('fusion_lib', [geprotorootgen])
@@ -76,4 +82,6 @@ env.test('dbroot_generator_tests',
                  'gecommon',
                  'qt-mt',
                  'gtest',
+                 File('/usr/lib/x86_64-linux-gnu/liblber.so'),
+                 File('/usr/lib/x86_64-linux-gnu/libldap.so')
                  ])

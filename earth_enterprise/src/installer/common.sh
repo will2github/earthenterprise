@@ -61,10 +61,11 @@ HOSTNAME_A="$(hostname -a | $NEWLINECLEANER)"
 
 NUM_CPUS="$(grep processor /proc/cpuinfo | wc -l | $NEWLINECLEANER)"
 
-SUPPORTED_OS_LIST=("Ubuntu", "Red Hat Enterprise Linux (RHEL)", "CentOS", "Linux Mint")
+SUPPORTED_OS_LIST=("Ubuntu", "Red Hat Enterprise Linux (RHEL)", "CentOS", "Linux Mint", "Debian GNU/Linux")
 UBUNTUKEY="ubuntu"
 REDHATKEY="rhel"
 CENTOSKEY="centos"
+DEBIANKEY="debian"
 OS_RELEASE1="/etc/os-release"
 OS_RELEASE2="/etc/system-release"
 
@@ -88,7 +89,7 @@ software_check()
     # args: $2: Ubuntu package
     # args: $3: RHEL package
 
-    if [ "$MACHINE_OS" == "$UBUNTUKEY" ] && [ ! -z "$2" ]; then
+    if { [ "$MACHINE_OS" == "$UBUNTUKEY" ] || [ "$MACHINE_OS" == "$DEBIANKEY" ]; } && [ ! -z "$2" ]; then
         if [[ -z "$(dpkg --get-selections | sed s:install:: | sed -e 's:\s::g' | grep ^$2\$)" ]]; then
             echo -e "\nInstall $2 and restart the $1."
             software_check_retval=1
@@ -133,6 +134,8 @@ determine_os()
             MACHINE_OS=$REDHATKEY
         elif [[ "${test_os,,}" == "centos"* ]]; then
             MACHINE_OS=$CENTOSKEY
+        elif [[ "${test_os,,}" == "debian gnu/linux"* ]]; then
+            MACHINE_OS=$DEBIANKEY
         else
             MACHINE_OS=""
             echo -e "\nThe installer could not determine your machine's operating system."

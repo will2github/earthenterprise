@@ -25,8 +25,8 @@ SCRIPTDIR=`dirname $0`
 . $SCRIPTDIR/common.sh
 
 # config values
-ASSET_ROOT="/gevol/assets"
-SOURCE_VOLUME="/gevol/src"
+ASSET_ROOT="/opt/google/gevol/assets"
+SOURCE_VOLUME="/opt/google/gevol/src"
 DEFAULTGEFUSIONUSER_NAME="gefusionuser"
 DEFAULTGROUPNAME="gegroup"
 GEFUSIONUSER_NAME=$DEFAULTGEFUSIONUSER_NAME
@@ -117,7 +117,7 @@ main_preinstall()
 	fi
 
 	# 64 bit check
-	if [[ "$(uname -i)" != "x86_64" ]]; then
+	if [[ "$(uname -m)" != "x86_64" ]]; then
 		echo -e "\n$GEEF $LONG_VERSION can only be installed on a 64 bit operating system."
 		exit 1
 	fi
@@ -239,7 +239,7 @@ load_systemrc_config()
 check_prereq_software()
 {
 	local check_prereq_software_retval=0
-  local script_name="$GEEF $LONG_VERSION installer"
+    local script_name="$GEEF $LONG_VERSION installer"
 
 	if ! software_check "$script_name" "libxml2-utils" "libxml2.*x86_64"; then
 		check_prereq_software_retval=1

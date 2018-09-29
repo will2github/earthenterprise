@@ -568,7 +568,8 @@ geFilePool::Writer::Writer(WriteStyle wStyle, TruncateStyle tStyle,
 
 geFilePool::Writer::~Writer(void) {
   if (wb_length_ != 0) {
-    throw khSimpleException("geFilePool::~Writer: write buffer not flushed.");
+    //throw khSimpleException("geFilePool::~Writer: write buffer not flushed.");
+    fprintf(stderr, "geFilePool::~Writer: write buffer not flushed.");
   }
 }
 

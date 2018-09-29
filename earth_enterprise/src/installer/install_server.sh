@@ -114,7 +114,7 @@ main_preinstall()
   fi
 
   # 64 bit check
-  if [[ "$(uname -i)" != "x86_64" ]]; then
+  if [[ "$(uname -m)" != "x86_64" ]]; then
     echo -e "\n$GEES $LONG_VERSION can only be installed on a 64 bit operating system."
     exit 1
   fi

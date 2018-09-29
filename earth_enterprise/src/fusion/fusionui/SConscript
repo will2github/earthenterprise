@@ -21,6 +21,8 @@ Import('env')
 env = env.Clone()
 env.UpdateCppflagsForSkia()
 
+env['CXXFLAGS'].append('-Wno-address')
+
 SConscript('site-icons/SConscript')
 
 # Qt (moc & uic) generates code with unused functions and unused values
@@ -46,7 +48,9 @@ env.Append( CXXFLAGS = ['-Wno-unused-function', '-Wno-unused-value'],
                   'freetype',
                   'qt-mt',
                   'xerces-c',
-                  'GL'])
+                  'GL',
+                  File('/usr/lib/x86_64-linux-gnu/liblber.so'),
+                  File('/usr/lib/x86_64-linux-gnu/libldap.so')])
 
 idlfiles = [ 'layoutpersist', 'preferences', 'filehistory', 'thematicstyles' ]
 env.idl(map(lambda n: n+'.idl', idlfiles))

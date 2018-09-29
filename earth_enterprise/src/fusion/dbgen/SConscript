@@ -25,12 +25,16 @@ gedbgen = env.executable('gedbgen',
                          ['gedbgen.cpp', DBConfigObj],
                          LIBS=['geprotorootgen', 'geautoingest', 'gesearchtabs',
                                'gexml', 'gedbroot', 'geiconutil', 'geutil', 'gecommon',
-                               'dbmanifest', 'qt-mt', 'xerces-c'])
+                               'dbmanifest', 'qt-mt', 'xerces-c',
+                               File('/usr/lib/x86_64-linux-gnu/liblber.so'),
+                               File('/usr/lib/x86_64-linux-gnu/libldap.so')])
 
 mapdbgen = env.executable('mapdbgen',
                           ['mapdbgen.cpp', DBConfigObj],
                           LIBS=['geautoingest', 'gesearchtabs',
                                 'gexml', 'geutil', 'gecommon',
-                                'dbmanifest', 'qt-mt', 'xerces-c'])
+                                'dbmanifest', 'qt-mt', 'xerces-c',
+                                File('/usr/lib/x86_64-linux-gnu/liblber.so'),
+                                File('/usr/lib/x86_64-linux-gnu/libldap.so')])
 
 env.install('fusion_bin', [gedbgen, mapdbgen])

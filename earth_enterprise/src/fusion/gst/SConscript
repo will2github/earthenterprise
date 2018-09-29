@@ -19,6 +19,7 @@ Import('env')
 
 env = env.Clone()
 env.UpdateCppflagsForSkia()
+env['CXXFLAGS'].append('-Wno-address')
 
 env.idl([ 'gstPlacemark.idl',
           'gstKVPAsset.idl', 'gstFormatRule.idl',
@@ -135,22 +136,32 @@ gstunittest = env.sharedLib('gstunittest',
                              LIBS=['gtest', 'gegst', 'gecommon'])
 
 env.test('gstGeode_unittest', 'gstGeode_unittest.cpp',
-         LIBS=['gegst', 'gtest', 'sgl', 'gif', 'png12', 'jpeg', 'freetype', 'geos',
-               'geutil', 'gecommon'])
+         LIBS=['gegst', 'gtest', 'sgl', 'gif', 'png', 'jpeg', 'freetype', 'geos',
+               'geutil', 'gecommon', File('/usr/lib/x86_64-linux-gnu/liblber.so'), File('/usr/lib/x86_64-linux-gnu/libldap.so')])
 env.test('gstPolygonUtils_unittest', 'gstPolygonUtils_unittest.cpp',
-         LIBS=['gegst', 'gtest', 'sgl', 'gif', 'png12', 'jpeg', 'freetype', 'geos'])
+         LIBS=['gegst', 'gtest', 'sgl', 'gif', 'png', 'jpeg', 'freetype', 'geos',
+                File('/usr/lib/x86_64-linux-gnu/liblber.so'),
+                File('/usr/lib/x86_64-linux-gnu/libldap.so')])
 
 env.test('gstGeomUtils_unittest', 'gstGeomUtils_unittest.cpp',
-         LIBS=['gstunittest', 'gegst', 'gtest'])
+         LIBS=['gstunittest', 'gegst', 'gtest',
+               File('/usr/lib/x86_64-linux-gnu/liblber.so'),
+               File('/usr/lib/x86_64-linux-gnu/libldap.so')])
 
 env.test('gstPolygonClipper2_unittest', 'gstPolygonClipper2_unittest.cpp',
-         LIBS=['gstunittest', 'gegst', 'gtest', 'gecommon'])
+         LIBS=['gstunittest', 'gegst', 'gtest', 'gecommon',
+               File('/usr/lib/x86_64-linux-gnu/liblber.so'),
+               File('/usr/lib/x86_64-linux-gnu/libldap.so')])
 
 env.test('gstGeometryChecker_unittest', 'gstGeometryChecker_unittest.cpp',
-         LIBS=['gstunittest', 'gegst', 'gtest', 'gecommon'])
+         LIBS=['gstunittest', 'gegst', 'gtest', 'gecommon',
+               File('/usr/lib/x86_64-linux-gnu/liblber.so'),
+               File('/usr/lib/x86_64-linux-gnu/libldap.so')])
 
 env.test('gstPolygonCleaner_unittest', 'gstPolygonCleaner_unittest.cpp',
-         LIBS=['gstunittest', 'gegst', 'gtest', 'gecommon'])
+         LIBS=['gstunittest', 'gegst', 'gtest', 'gecommon',
+               File('/usr/lib/x86_64-linux-gnu/liblber.so'),
+               File('/usr/lib/x86_64-linux-gnu/libldap.so')])
 
 
 

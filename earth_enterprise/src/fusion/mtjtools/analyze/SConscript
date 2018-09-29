@@ -21,6 +21,8 @@ env = env.Clone()
 env.Append( CPPPATH = ['#fusion/mtjtools/histogram'])
 
 analyze = env.executable('analyze', 'analyze.cpp',
-                         LIBS=['gehistogram', 'geos'])
+                         LIBS=['gehistogram', 'geos',
+                               File('/usr/lib/x86_64-linux-gnu/liblber.so'),
+                               File('/usr/lib/x86_64-linux-gnu/libldap.so')])
 
 env.install('tools_bin', [analyze])

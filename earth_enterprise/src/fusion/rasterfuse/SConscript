@@ -31,17 +31,22 @@ gepackgen = env.executable('gepackgen',
                            LIBS=['geautoingest', 'khrasterffio', 'gegdal',
                                  'geraster', 'khffio', 'gefconfigutil',
                                  'geutil', 'gecommon', 'geprotobuf',
-                                 'qt-mt', 'geos'])
+                                 'qt-mt', 'geos',
+                                 File('/usr/lib/x86_64-linux-gnu/liblber.so'),
+                                 File('/usr/lib/x86_64-linux-gnu/libldap.so')])
 
 pyr_info = env.executable('pyr_info', ['pyrinfo.cpp', '../tools/geImageWriter.o'],
                           LIBS=['geraster', 'geutil', 'gecommon',
-                                'gerastergdal', 'gegdal', 'gdal', 'qt-mt'])
+                                'gerastergdal', 'gegdal', 'gdal', 'qt-mt',
+                                File('/usr/lib/x86_64-linux-gnu/liblber.so'),
+                                File('/usr/lib/x86_64-linux-gnu/libldap.so')])
 
 # ***** Make a copy of the env and add the libs shared by these last two. *****
 # ***** They share a .cpp file and SCons whines if they override the LIBS
 # ***** themselves.
 env = env.Clone();
-env.Append(LIBS=['geraster', 'gegdal', 'gegdalutil', 'gdal', 'geutil', 'gecommon', 'qt-mt', 'geos'])
+env.Append(LIBS=['geraster', 'gegdal', 'gegdalutil', 'gdal', 'geutil', 'gecommon', 'qt-mt', 'geos',
+                 File('/usr/lib/x86_64-linux-gnu/liblber.so'), File('/usr/lib/x86_64-linux-gnu/libldap.so')])
 
 gerasterimport = env.executable('gerasterimport',
                                 ['gerasterimport.cpp',
@@ -54,7 +59,9 @@ gerasterextract = env.executable('gerasterextract',
 geraster2kml = env.executable('geraster2kml',
                               ['geraster2kml.cpp'],
                               LIBS=['geautoingest', 'geraster', 'gemiscconfig',
-                                    'geutil', 'gecommon', 'qt-mt'])
+                                    'geutil', 'gecommon', 'qt-mt',
+                                    File('/usr/lib/x86_64-linux-gnu/liblber.so'),
+                                    File('/usr/lib/x86_64-linux-gnu/libldap.so')])
 
 geraster2gigapxl = env.executable('geraster2gigapxl',
                                   ['geraster2gigapxl.cpp'])

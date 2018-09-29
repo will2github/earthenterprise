@@ -18,7 +18,7 @@
 Import('env')
 
 gexml = env.sharedLib('gexml', ['khxml.cpp'],
-                      LIBS=['geutil', 'xerces-c', 'png12'])
+                      LIBS=['geutil', 'xerces-c', 'png'])
 
 env.install('common_lib', [gexml])
 
@@ -33,4 +33,6 @@ env.test('idl_tests',
           map(lambda n: '.idl/'+n+'.cpp', test_idlfiles),
           ],
          LIBS=['gexml', 'gecommon', 'geutil',
-               'qt-mt', 'xerces-c', 'gtest'])
+               'qt-mt', 'xerces-c', 'gtest',
+               File('/usr/lib/x86_64-linux-gnu/liblber.so'),
+               File('/usr/lib/x86_64-linux-gnu/libldap.so')])

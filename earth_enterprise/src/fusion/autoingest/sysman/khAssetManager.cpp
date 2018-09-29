@@ -301,7 +301,7 @@ khAssetManager::PendingAssetGuard::~PendingAssetGuard(void)
 
       // XXX - THIS IS SAFE ONLY IF CALLER CAN DEAL WITH THIS A DESTRUCTOR
       // THROWING AND EXCEPTION. STACK VARIABLE CAN.
-      throw;
+      //throw;
     }
   }
 }

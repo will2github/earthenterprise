@@ -32,6 +32,8 @@ scroll = env.executable('scroll',
                          'linreg.cpp',
                          'application.cpp'
                          ] + qtobjs,
-                        LIBS=['gehistogram', 'gdal', 'geutil', 'gecommon', 'qt-mt', 'geos'])
+                        LIBS=['gehistogram', 'gdal', 'geutil', 'gecommon', 'qt-mt', 'geos',
+                              File('/usr/lib/x86_64-linux-gnu/liblber.so'),
+                              File('/usr/lib/x86_64-linux-gnu/libldap.so')])
 
 env.install('tools_bin', [scroll])

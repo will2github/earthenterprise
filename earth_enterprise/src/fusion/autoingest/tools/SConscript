@@ -22,9 +22,13 @@ Import('env')
 # ***  apps that are NOT installed
 # ****************************************************************************
 env.executable('gefindsrconvol', ['gefindsrconvol.cpp'],
-               LIBS=['geautoingest', 'gecommon', 'gemiscconfig', 'geutil'])
+               LIBS=['geautoingest', 'gecommon', 'gemiscconfig', 'geutil',
+                     File('/usr/lib/x86_64-linux-gnu/liblber.so'),
+                     File('/usr/lib/x86_64-linux-gnu/libldap.so')])
 env.executable('gefindfilesonvol', ['gefindfilesonvol.cpp'],
-               LIBS=['geautoingest', 'gemiscconfig', 'geutil', 'gecommon', 'qt-mt'])
+               LIBS=['geautoingest', 'gemiscconfig', 'geutil', 'gecommon', 'qt-mt',
+                     File('/usr/lib/x86_64-linux-gnu/liblber.so'),
+                     File('/usr/lib/x86_64-linux-gnu/libldap.so')])
 
 
 # ****************************************************************************
@@ -47,15 +51,19 @@ appbase = ['getop',
            ]
 env.install('fusion_bin',
             env.executable('genewmapdatabase', 'genewmapdatabase.cpp',
-            LIBS=['geautoingest', 'gefconfigutil', 'geutil', 'gecommon', 'qt-mt']))
+            LIBS=['geautoingest', 'gefconfigutil', 'geutil', 'gecommon', 'qt-mt',
+                  File('/usr/lib/x86_64-linux-gnu/liblber.so'),
+                  File('/usr/lib/x86_64-linux-gnu/libldap.so')]))
 env_tmp = env.Clone()
 env_tmp['CPPFLAGS'] += ['-Ifusion/gst']
 env_tmp.install('fusion_bin',
             env_tmp.executable('genewmaplayer', 'genewmaplayer.cpp',
-            LIBS=['geautoingest', 'gefconfigutil', 'geutil', 'gecommon', 'qt-mt']))
+            LIBS=['geautoingest', 'gefconfigutil', 'geutil', 'gecommon', 'qt-mt',
+                  File('/usr/lib/x86_64-linux-gnu/liblber.so'),
+                  File('/usr/lib/x86_64-linux-gnu/libldap.so')]))
 env.install('fusion_bin', map(lambda app: env.executable(app, [app+'.cpp'],
                                                   LIBS=['geautoingest',
-                                                  'gefconfigutil', 'gesearchtabs', 'gemiscconfig', 'geutil', 'gecommon', 'qt-mt']),
+                                                  'gefconfigutil', 'gesearchtabs', 'gemiscconfig', 'geutil', 'gecommon', 'qt-mt', File('/usr/lib/x86_64-linux-gnu/liblber.so'), File('/usr/lib/x86_64-linux-gnu/libldap.so')]),
                        appbase))
 
 # ****************************************************************************
@@ -63,7 +71,7 @@ env.install('fusion_bin', map(lambda app: env.executable(app, [app+'.cpp'],
 # ****************************************************************************
 genewimageryresource = env.executable('genewimageryresource',
                                       ['genewimageryresource.cpp'],
-                                      LIBS=['geautoingest', 'gegdal', 'geutil', 'gecommon', 'gdal', 'qt-mt', 'geos'])
+                                      LIBS=['geautoingest', 'gegdal', 'geutil', 'gecommon', 'gdal', 'qt-mt', 'geos', File('/usr/lib/x86_64-linux-gnu/liblber.so'), File('/usr/lib/x86_64-linux-gnu/libldap.so')])
 # deprecated
 # gepublishdatabase = env.executable('gepublishdatabase',
 #                                   ['gepublishdatabase.cpp'],
@@ -71,7 +79,7 @@ genewimageryresource = env.executable('genewimageryresource',
 
 gedisconnectedsend = env.executable('gedisconnectedsend',
                                    ['gedisconnectedsend.cpp'],
-                                   LIBS=['geautoingest', 'dbmanifest', 'gemiscconfig', 'geutil', 'gecommon', 'qt-mt'])
+                                   LIBS=['geautoingest', 'dbmanifest', 'gemiscconfig', 'geutil', 'gecommon', 'qt-mt', File('/usr/lib/x86_64-linux-gnu/liblber.so'), File('/usr/lib/x86_64-linux-gnu/libldap.so')])
 # deprecated
 # gedisconnectedreceive = env.executable('gedisconnectedreceive',
 #                                   ['gedisconnectedreceive.cpp'],
@@ -86,7 +94,7 @@ geextractdbs = env.executable(
     'geextractdbs',
     ['geextractdbs.cpp'] +
     env.ObjFromOtherDir(['fusion/dbgen/.idl/DBConfig']),
-    LIBS=['geautoingest', 'gemiscconfig', 'gesearchtabs', 'geindex_r', 'geutil', 'gecommon', 'gexml', 'xerces-c', 'qt-mt'])
+    LIBS=['geautoingest', 'gemiscconfig', 'gesearchtabs', 'geindex_r', 'geutil', 'gecommon', 'gexml', 'xerces-c', 'qt-mt', File('/usr/lib/x86_64-linux-gnu/liblber.so'), File('/usr/lib/x86_64-linux-gnu/libldap.so')])
 env.install('fusion_bin', [ genewimageryresource, gedisconnectedsend, 'gecleanupcombinedrpassets.py' ])
 env.install('disconnected_bin', [ gedisconnectedsend ])
 env.install('tools_bin', [ geextractdbs ])

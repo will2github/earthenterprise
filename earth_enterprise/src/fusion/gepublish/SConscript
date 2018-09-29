@@ -28,12 +28,15 @@ libgepublish = env.sharedLib('gepublish',
 
 env.test('curl_request_unittest',
          'CurlRequest_unittest.cpp',
-         LIBS=['gepublish', 'curl', 'gtest'])
+         LIBS=['gepublish', 'curl', 'gtest',
+               File('/usr/lib/x86_64-linux-gnu/liblber.so'),
+               File('/usr/lib/x86_64-linux-gnu/libldap.so')])
 
 geserveradmin = env.executable('geserveradmin', 'geserveradmin.cpp',
                            LIBS=['dbmanifest', 'gepublish', 'gemiscconfig',
                                  'geutil', 'gecommon', 'geautoingest', 'qt-mt',
-                                 'geconfigutil'])
+                                 'geconfigutil', File('/usr/lib/x86_64-linux-gnu/liblber.so'),
+                                 File('/usr/lib/x86_64-linux-gnu/libldap.so')])
 
 swig_env = env.DeepCopy()
 root_dir = Dir(swig_env.exportdirs['root']).abspath
@@ -45,6 +48,7 @@ swig_env['CXXFLAGS'] = cxx_flags
 swig_env['CPPFLAGS'] += ['-fPIC']  # Needed for 64-bit compilation.
 swig_env['CPPFLAGS'] += ['-I%s' % swig_env['python_include']]
 swig_env.Append(SWIGFLAGS = ['-python', '-c++'])
+swig_env['STATIC_AND_SHARED_OBJECTS_ARE_THE_SAME']=1
 
 libgepublishmanagerhelper = swig_env.sharedLib('gepublishmanagerhelper',
                                                ['gepublishmanagerhelper.cpp', 'gepublishmanagerhelper.i'],

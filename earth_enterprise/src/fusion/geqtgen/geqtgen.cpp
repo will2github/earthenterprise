@@ -102,8 +102,9 @@ class QuadtreePacketSource
   virtual ~QuadtreePacketSource() {
     if (!std::uncaught_exception()) {
       if (source_) {
-        throw khSimpleException("QuadtreePacketSource: Close() not called: ")
-          << MergeSource<MergeType>::name();
+        //throw khSimpleException("QuadtreePacketSource: Close() not called: ")
+        //  << MergeSource<MergeType>::name();
+        fprintf(stderr, "QuadtreePacketSource: Close() not called: %s\n", MergeSource<MergeType>::name().c_str());
       }
     }
   }

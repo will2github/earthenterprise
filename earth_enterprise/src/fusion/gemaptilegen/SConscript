@@ -20,6 +20,8 @@ Import('env')
 env = env.Clone()
 env.UpdateCppflagsForSkia()
 
+env['CXXFLAGS'].append('-Wno-address')
+
 env.idl(['Config.idl'])
 
 ConfigObj = env.SharedObject('.idl/Config.cpp')
@@ -27,6 +29,6 @@ ConfigObj = env.SharedObject('.idl/Config.cpp')
 gemaptilegen = env.executable('gemaptilegen',
                             ['gemaptilegen.cpp', 'Generator.cpp',
                              ConfigObj],
-                            LIBS=['gegst', 'sgl', 'gif', 'gefconfigutil', 'png12', 'jpeg', 'freetype', 'xerces-c', 'geautoingest', 'gexml', 'qt-mt', 'gecommon', 'geutil', 'geos'])
+                            LIBS=['gegst', 'sgl', 'gif', 'gefconfigutil', 'png', 'jpeg', 'freetype', 'xerces-c', 'geautoingest', 'gexml', 'qt-mt', 'gecommon', 'geutil', 'geos', File('/usr/lib/x86_64-linux-gnu/liblber.so'), File('/usr/lib/x86_64-linux-gnu/libldap.so')])
 
 env.install('fusion_bin', [gemaptilegen])

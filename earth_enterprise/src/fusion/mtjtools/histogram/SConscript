@@ -22,7 +22,9 @@ gehistogram = env.sharedLib('gehistogram', ['khistogram.cpp',
                             LIBS=['gegdal', 'gdal'])
 
 histogram = env.executable('histogram', 'histogram.cpp',
-                           LIBS=['gehistogram', 'gdal', 'geos'])
+                           LIBS=['gehistogram', 'gdal', 'geos',
+                                 File('/usr/lib/x86_64-linux-gnu/liblber.so'),
+                                 File('/usr/lib/x86_64-linux-gnu/libldap.so')])
 
 env.install('tools_bin', [histogram])
 env.install('fusion_lib', [gehistogram])

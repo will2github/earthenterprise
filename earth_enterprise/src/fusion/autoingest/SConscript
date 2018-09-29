@@ -204,11 +204,15 @@ env.install('common_lib', [geautoingest, gemiscconfig])
 
 env.test('AssetDefsExtra_unittest',
          'AssetDefsExtra_unittest.cpp',
-         LIBS=['geautoingest', 'gemiscconfig', 'gtest'])
+         LIBS=['geautoingest', 'gemiscconfig', 'gtest',
+               File('/usr/lib/x86_64-linux-gnu/liblber.so'),
+               File('/usr/lib/x86_64-linux-gnu/libldap.so')])
 
 env.test('JsUtils_unittest',
          'JsUtils_unittest.cpp',
-         LIBS=['geautoingest', 'gemiscconfig', 'gtest'])
+         LIBS=['geautoingest', 'gemiscconfig', 'gtest',
+               File('/usr/lib/x86_64-linux-gnu/liblber.so'),
+               File('/usr/lib/x86_64-linux-gnu/libldap.so')])
 
 SConscript('sysman/SConscript', exports=['env', 'commonobj', 'plugins'])
 SConscript('tools/SConscript', exports='env')

@@ -22,6 +22,8 @@ env = env.Clone()
 env.Append( CPPPATH = ['#fusion/mtjtools/histogram'])
 
 visine = env.executable('visine', 'visine.cpp',
-                        LIBS=['gehistogram', 'gdal', 'geos'])
+                        LIBS=['gehistogram', 'gdal', 'geos',
+                              File('/usr/lib/x86_64-linux-gnu/liblber.so'),
+                              File('/usr/lib/x86_64-linux-gnu/libldap.so')])
 
 env.install('tools_bin', [visine])

@@ -37,6 +37,8 @@ geindexcheck = env.executable('geindexcheck',
                                   'gexml',
                                   'xerces-c',
                                   'serverdb',
+                                  File('/usr/lib/x86_64-linux-gnu/liblber.so'),
+                                  File('/usr/lib/x86_64-linux-gnu/libldap.so')
                                   ])
 
 # Note: deploy geindexcheck into common_bin, since it is being used by
